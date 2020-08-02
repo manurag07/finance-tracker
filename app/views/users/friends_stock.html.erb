@@ -1,0 +1,49 @@
+<h1 class="text-center">Friends</h1>
+<div class="search-bar">
+  <h2>Serach Friend</h2>
+  <%= form_tag search_friend_path, remote: true, method: :get do%>
+    <div class="form-group row">
+      <div class="col-sm-9">
+        <%= text_field_tag :friend_name, params[:friend_name], class: 'form-control', placeholder: 'Enter the friend name' %>
+      </div>
+      <div class="col-sm-3">
+        <%= button_tag type: :submit, class: 'btn btn-success' do%>
+        <%= fa_icon 'search'%>
+        <%end%>
+      </div>
+    </div>
+  <%end%>
+</div>
+  <div id="friend_result">
+
+  </div>
+<%unless @friends.empty?%>
+  <div class="row">
+    <div class="col-sm-9">
+      <table class="table table-borderd table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @friends.each_with_index do |friend, index|%>
+            <tr>
+              <th scope="row"><%= index + 1%></th>
+              <td><%= friend.first_name%></td>
+              <td><%= friend.last_name%></td>
+              <td><%= friend.email%></td>
+              <td>
+                <%= link_to 'View Profile', show_profile_path(id: friend), class: 'btn btn-xs btn-success'%>
+                <%= link_to 'Remove Friendship', destroy_friend_path(id: friend.id), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure to remove Friendship from #{friend.first_name}"}  %></td>
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<%end%>

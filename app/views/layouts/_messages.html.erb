@@ -1,0 +1,5 @@
+<% if notice.present? %>
+  <p class="alert alert-success" data-dismiss="alert" aria-label="Close"><%= notice %></p>
+<%elsif alert.present? %>
+  <p class="alert alert-danger" data-dismiss="alert" aria-label="Close"><%= alert %></p>
+<%end%>

@@ -1,0 +1,25 @@
+<div class="price-result">
+  <%= render 'layouts/messages'%>
+</div>
+
+<% if @stock.present?%>
+  <div class="card card-header price-result">
+    <strong>Name: <%= @stock.name%></strong>
+    <strong>Symbol: <%= @stock.ticker%></strong>
+    <strong>Price: <%= @stock.last_price%></strong>
+    <% if current_user.can_track_stock?(@stock.ticker)%>
+      <%= link_to 'Add to Portfolio', user_stocks_path(user: current_user,
+              ticker: @stock.ticker), method: :post, class: 'btn btn-xs btn-success'%>
+    <%else%>
+      <span class="badge badge-secondary">
+        You are already tracking
+        <%if !current_user.under_stock_limit?%>
+          10 stocks.
+        <%end%>
+        <%if current_user.present_in_db?(@stock.ticker)%>
+          this stock.
+        <%end%>
+      </span>
+    <%end%>
+  </div>
+<%end%>

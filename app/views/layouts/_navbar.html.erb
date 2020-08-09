@@ -17,9 +17,11 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Profile
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <%= link_to 'Edit Profile', edit_user_registration_path, class: 'dropdown-item'%>
-          </div>
+          <%if user_signed_in?%>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to 'Edit Profile', edit_user_registration_path, class: 'dropdown-item'%>
+            </div>
+          <%end%>
         </li>
       </ul>
       <%if user_signed_in?%>

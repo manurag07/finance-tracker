@@ -66,3 +66,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # for the icons
 gem 'font-awesome-rails'
+
+gem 'whenever', require: false

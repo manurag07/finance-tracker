@@ -18,6 +18,17 @@ class Stock < ApplicationRecord
     end
   end
 
+  def self.update_lookup
+    client = setup_connection
+    begin
+      Stock.all.each do |sym|
+        sym.update(last_price: client.price(sym.ticker))
+      end
+    rescue StandardError
+      nil
+    end
+  end
+
   def self.setup_connection
     IEX::Api::Client.new(
       publishable_token: 'Tpk_2fff5ee7b46e477ea40d6fbf63db866a',
